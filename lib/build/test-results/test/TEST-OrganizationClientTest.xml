@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="OrganizationClientTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2022-03-18T11:39:13" hostname="MacBook-Pro-Egor.local" time="0.141">
-  <properties/>
-  <testcase name="Planado v2 organization client create test" classname="OrganizationClientTest" time="0.047"/>
-  <testcase name="Planado v2 organization client update test" classname="OrganizationClientTest" time="0.027"/>
-  <testcase name="Planado v2 organization client get test" classname="OrganizationClientTest" time="0.065"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="FileTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-03-18T11:39:10" hostname="MacBook-Pro-Egor.local" time="1.445">
-  <properties/>
-  <testcase name="Upload file to minio" classname="FileTest" time="1.445"/>
-  <system-out><![CDATA[14:39:11.133 [Test worker] INFO  com.hydra_billing.camunda.api.hydra.oms.File$Companion - Upload files to minio
-]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="PersonTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-03-18T11:39:11" hostname="MacBook-Pro-Egor.local" time="0.564">
-  <properties/>
-  <testcase name="Hydra rest api create person" classname="PersonTest" time="0.564"/>
-  <system-out><![CDATA[14:39:12.284 [Test worker] INFO  com.hydra_billing.camunda.api.hydra.rest.v2.subjects.persons.Person$Companion - Create person with CreateParams(vc_first_name=Клаус, vc_surname=Майне, vc_second_name=null, n_subj_state_id=On, n_opf_id=null, n_firm_id=100, n_sex_id=null, vc_inn=null, vc_doc_serial=null, vc_doc_no=null, d_doc=null, vc_document=null, vc_doc_department=null, d_birth=null, vc_birth_place=null, vc_pens_insurance=null, vc_med_insurance=null, n_citizenship_id=null, vc_kpp=null, vc_rem=null, t_tags=null, additional_values=null)
-]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

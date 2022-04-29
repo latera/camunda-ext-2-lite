@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="SubjectAddressesTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-03-18T11:39:13" hostname="MacBook-Pro-Egor.local" time="0.119">
-  <properties/>
-  <testcase name="Hydra rest api get subjects addresses list" classname="SubjectAddressesTest" time="0.119"/>
-  <system-out><![CDATA[14:39:13.173 [Test worker] INFO  com.hydra_billing.camunda.api.hydra.rest.v2.subjects.SubjectAddresses$Companion - Get addresses for subjects 99
-]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
