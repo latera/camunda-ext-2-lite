@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="SelectTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-03-18T11:39:12" hostname="MacBook-Pro-Egor.local" time="0.358">
+  <properties/>
+  <testcase name="Hydra HID select" classname="SelectTest" time="0.358"/>
+  <system-out><![CDATA[14:39:13.000 [Test worker] INFO  com.hydra_billing.camunda.api.hydra.hid.Hid$Companion - Select request started
+14:39:13.000 [Test worker] INFO  com.hydra_billing.camunda.api.hydra.hid.Hid$Companion - Select request finished
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

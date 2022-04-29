@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ReportTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2022-03-18T11:39:12" hostname="MacBook-Pro-Egor.local" time="0.397">
+  <properties/>
+  <testcase name="Jasper connector getReportResult" classname="ReportTest" time="0.014"/>
+  <testcase name="Jasper connector getReportExecutionStatus with ready status" classname="ReportTest" time="0.087"/>
+  <testcase name="Jasper connector getFileFromReport with image file" classname="ReportTest" time="0.039"/>
+  <testcase name="Jasper connector getFileFromReport with JS file" classname="ReportTest" time="0.016"/>
+  <testcase name="Jasper connector getReportExecutionStatus with failed status" classname="ReportTest" time="0.028"/>
+  <testcase name="Jasper connector getReportExecutionDetails" classname="ReportTest" time="0.133"/>
+  <testcase name="Jasper connector executeReport" classname="ReportTest" time="0.064"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

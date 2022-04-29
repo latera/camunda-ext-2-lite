@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="CustomerTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2022-03-18T11:39:13" hostname="MacBook-Pro-Egor.local" time="0.073">
+  <properties/>
+  <testcase name="Hydra rest api create customer" classname="CustomerTest" time="0.042"/>
+  <testcase name="Hydra rest api update customer" classname="CustomerTest" time="0.015"/>
+  <testcase name="Hydra rest api show customer" classname="CustomerTest" time="0.015"/>
+  <system-out><![CDATA[14:39:13.464 [Test worker] INFO  com.hydra_billing.camunda.api.hydra.rest.v2.subjects.customers.Customer$Companion - Create customer with CreateParams(vc_code=Meine created, n_base_subject_id=78194101, t_tags=[тестовый_абонент], n_subj_group_id=55027301, group_ids=[40250801], vc_rem=Commentary for created Meine, n_reseller_id=94911101, additional_values=null)
+14:39:13.502 [Test worker] INFO  com.hydra_billing.camunda.api.hydra.rest.v2.subjects.customers.Customer$Companion - Update customer with id=78194501
+14:39:13.517 [Test worker] INFO  com.hydra_billing.camunda.api.hydra.rest.v2.subjects.customers.Customer$Companion - Get customer by id=50162901
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

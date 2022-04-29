@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="PersonAddressTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-03-18T11:39:12" hostname="MacBook-Pro-Egor.local" time="0.106">
+  <properties/>
+  <testcase name="Hydra rest api create person address" classname="PersonAddressTest" time="0.106"/>
+  <system-out><![CDATA[14:39:12.105 [Test worker] INFO  com.hydra_billing.camunda.api.hydra.rest.v2.subjects.persons.PersonAddress$Companion - Create address for person 78419101 with CreateParams(n_addr_type_id=FactPlace, n_subj_addr_type_id=Actual, vc_address=Россия, г. Москва, г. Зеленоград, vc_code=null, n_addr_state_id=On, n_floor_no=null, n_region_id=null, d_begin=null, d_end=null, vc_rem=null, c_fl_main=null, vc_intercom_code=null, vc_entrance_no=null, vc_flat=null, n_bind_addr_id=null, n_par_addr_id=null)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="DocumentAttachmentTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2022-03-18T11:39:12" hostname="MacBook-Pro-Egor.local" time="0.144">
+  <properties/>
+  <testcase name="Hydra rest api create file" classname="DocumentAttachmentTest" time="0.071"/>
+  <testcase name="Hydra rest api document file delete" classname="DocumentAttachmentTest" time="0.039"/>
+  <testcase name="Hydra rest api document file list" classname="DocumentAttachmentTest" time="0.027"/>
+  <system-out><![CDATA[14:39:12.775 [Test worker] INFO  com.hydra_billing.camunda.api.hydra.rest.v2.documents.DocumentAttachment$Companion - Create file with CreateParams(base64_content=IWRscm93ICxvbGxlSA==, file_name=hello_world.txt, name=hello_world.txt)
+14:39:12.840 [Test worker] INFO  com.hydra_billing.camunda.api.hydra.rest.v2.documents.DocumentAttachment$Companion - Delete file 99952301 for document 94077301
+14:39:12.881 [Test worker] INFO  com.hydra_billing.camunda.api.hydra.rest.v2.documents.DocumentAttachment$Companion - Get files for document 94077301
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
