@@ -1,0 +1,53 @@
+package com.hydra_billing.camunda.procs.hydra.addresses
+
+import com.hydra_billing.camunda.api.hydra.rest.v2.net_devices.entries.Address
+import com.hydra_billing.camunda.api.hydra.rest.v2.net_devices.types.*
+import com.hydra_billing.camunda.helpers.camunda.getLong
+import com.hydra_billing.camunda.helpers.common.DataClassHelper
+import com.hydra_billing.camunda.helpers.hydra.rest.v2.LoginHelper
+import com.hydra_billing.camunda.procs.BaseProc
+import io.ktor.client.*
+import org.camunda.bpm.engine.delegate.DelegateExecution
+
+/**
+ * This delegate is designed to get the equipment component address via Hydra REST API.
+ *
+ * This delegate is using the following execution variables:
+ * - <code>hydraEquipmentId</code> - Equipment ID (*required) /Long/
+ * - <code>hydraEquipmentComponentId</code> - Equipment component ID (*required*) /Long/
+ * - <code>hydraEquipmentComponentAddressId</code> - Equipment address ID (*required) /Long/
+ *
+ * The result of this delegate execution is the following variables stored in the Camunda execution:
+ * - <code>hydraEquipmentComponentAddress</code> -  Equipment component address /net_devices.Types.AddressParams/
+ */
+class GetEquipmentComponentAddressProc : BaseProc() {
+
+    override fun perform(execution: DelegateExecution) {
+        val restApi = LoginHelper.getRestApiClient()
+        val equipmentId = getLong(execution, "hydraEquipmentId")
+        val equipmentComponentId = getLong(execution, "hydraEquipmentComponentId")
+        val addressId = getLong(execution, "hydraEquipmentComponentAddressId")
+        setToExecution(execution, doAction(restApi, equipmentId, equipmentComponentId, addressId))
+    }
+
+    fun doAction(
+        restApi: HttpClient,
+        equipmentId: Long,
+        equipmentComponentId: Long,
+        addressId: Long
+    ): AddressParams {
+        return Address(restApi).get(equipmentId, equipmentComponentId, addressId)
+    }
+
+    private fun setToExecution(
+        execution: DelegateExecution,
+        equipmentAddress: AddressParams
+    ) {
+        execution.setVariable(
+            "hydraEquipmentComponentAddress",
+            DataClassHelper.convertDataClassToMap<AddressParams>(
+                equipmentAddress
+            )
+        )
+    }
+}

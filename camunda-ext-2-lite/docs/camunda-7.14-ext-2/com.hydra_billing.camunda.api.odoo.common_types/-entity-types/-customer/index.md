@@ -1,0 +1,16 @@
+//[camunda-7.14-ext-2](../../../../index.md)/[com.hydra_billing.camunda.api.odoo.common_types](../../index.md)/[EntityTypes](../index.md)/[Customer](index.md)
+
+# Customer
+
+[jvm]\
+@SerializedName(value = res.partner)
+
+[Customer](index.md)("res.partner")
+
+## Properties
+
+| Name | Summary |
+|---|---|
+| [name](name.md) | [jvm]<br>val [name](name.md): String |
+| [ordinal](ordinal.md) | [jvm]<br>val [ordinal](ordinal.md): Int |
+| [value](value.md) | [jvm]<br>val [value](value.md): String |
