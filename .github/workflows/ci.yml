@@ -1,0 +1,40 @@
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version of camunda-ext-2-lite'
+        required: false
+        type: string
+  push:
+    branches:
+      - master
+    tags-ignore:
+      - '**'
+
+env:
+  DOCKER_IMAGE: "camunda:7.14"
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: set variables
+        run: |
+          export VERSION=${{ github.event.inputs.version }}
+          echo "::set-env name=VERSION::$VERSION"
+          export IMAGE_NAME="${DOCKER_IMAGE}-$(echo ${GITHUB_REF_NAME} | tr '[:upper:]' '[:lower:]')"
+          echo "::set-env name=IMAGE_NAME::$IMAGE_NAME"
+      - name: build image
+        run: |
+          docker build -t camunda-ext-2-lite --target camunda-ext-2-lite --build-arg VERSION="${VERSION}" -f docker/Dockerfile .
+          docker build -t "${IMAGE_NAME}" --build-arg VERSION="${VERSION}" -f docker/Dockerfile .
+      - name: run test
+        run: |
+          docker run --rm camunda-ext-2-lite ./gradlew cleanTest test
+      - name: push image
+        run: |
+          echo push
+        if: github.event.inputs.version != ""
