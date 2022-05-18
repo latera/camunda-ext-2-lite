@@ -37,4 +37,4 @@ jobs:
       - name: push image
         run: |
           echo push
-        if: github.event.inputs.version != ""
+        if: github.event.inputs.version != ''
