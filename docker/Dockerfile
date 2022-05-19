@@ -5,6 +5,10 @@ COPY ./lib ./gradle ./gradlew ./settings.gradle ./gradlew.bat /app/
 
 WORKDIR /app
 
+ARG VERSION
+
+ENV VERSION=${VERSION}
+
 RUN gradle wrapper && \
     ./gradlew clean build && \
     gradle copyDependencies
