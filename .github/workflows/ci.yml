@@ -23,14 +23,12 @@ jobs:
         uses: actions/checkout@v3
       - name: set variables
         run: |
-          export VERSION=${{ github.event.inputs.version }}
-          echo "::set-env name=VERSION::$VERSION"
-          export IMAGE_NAME="${DOCKER_IMAGE}-$(echo ${GITHUB_REF_NAME} | tr '[:upper:]' '[:lower:]')"
-          echo "::set-env name=IMAGE_NAME::$IMAGE_NAME"
+          echo VERSION=${{ github.event.inputs.version }} >> $GITHUB_ENV
+          echo IMAGE_NAME="${DOCKER_IMAGE}-$(echo ${GITHUB_REF_NAME} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
       - name: build image
         run: |
-          docker build -t camunda-ext-2-lite --target camunda-ext-2-lite --build-arg VERSION="${VERSION}" -f docker/Dockerfile .
-          docker build -t "${IMAGE_NAME}" --build-arg VERSION="${VERSION}" -f docker/Dockerfile .
+          docker build -t camunda-ext-2-lite --target camunda-ext-2-lite --build-arg VERSION="${{ env.VERSION }}" -f docker/Dockerfile .
+          docker build -t "${{ env.IMAGE_NAME }}" --build-arg VERSION="${{ env.VERSION }}" -f docker/Dockerfile .
       - name: run test
         run: |
           docker run --rm camunda-ext-2-lite ./gradlew cleanTest test
