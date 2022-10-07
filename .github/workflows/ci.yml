@@ -1,0 +1,48 @@
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version of camunda-ext-2-lite'
+        required: false
+        type: string
+  push:
+    branches:
+      - master
+    tags-ignore:
+      - '**'
+
+env:
+  DOCKER_IMAGE: "latera/camunda-ext2-lite"
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: set variables
+        run: |
+          echo VERSION=${{ github.event.inputs.version }} >> $GITHUB_ENV
+      - name: build testing image
+        run: |
+          docker build -t camunda-ext-2-lite --target camunda-ext-2-lite --build-arg VERSION="${{ env.VERSION }}" -f docker/Dockerfile .
+      - name: run tests
+        run: |
+          docker run --rm camunda-ext-2-lite ./gradlew cleanTest test
+      - name: build release image
+        run: |
+          docker build -t "${DOCKER_IMAGE}:${{ env.VERSION }}" --build-arg VERSION="${{ env.VERSION }}" -f docker/Dockerfile .
+          docker login -u ${{ secrets.DOCKER_HUB_USER }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
+          docker push "${DOCKER_IMAGE}:${{ env.VERSION }}"
+          docker create --name jar "${DOCKER_IMAGE}:${{ env.VERSION }}"
+          docker cp jar:/camunda/lib/camunda-7.14-ext-2-${{ env.VERSION }}.jar ./
+        if: github.event.inputs.version != ''
+      - name: create release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: ${{ env.VERSION }}
+          tag_name: ${{ env.VERSION }}
+          target_commitish: ${{ github.sha }}
+          files: camunda-7.14-ext-2-${{ env.VERSION }}.jar
+        if: github.event.inputs.version != ''
