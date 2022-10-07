@@ -1,6 +1,0 @@
-//[camunda-7.14-ext-2](../../../../index.md)/[com.hydra_billing.camunda.api.hydra.common_types](../../index.md)/[AddressType](../index.md)/[DNS_CNAME_Rec](index.md)/[name](name.md)
-
-# name
-
-[jvm]\
-val [name](name.md): String

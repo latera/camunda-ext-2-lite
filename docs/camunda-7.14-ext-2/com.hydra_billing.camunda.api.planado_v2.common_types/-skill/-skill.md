@@ -1,6 +1,0 @@
-//[camunda-7.14-ext-2](../../../index.md)/[com.hydra_billing.camunda.api.planado_v2.common_types](../index.md)/[Skill](index.md)/[Skill](-skill.md)
-
-# Skill
-
-[jvm]\
-fun [Skill](-skill.md)(uuid: String, name: String? = null)

@@ -6,6 +6,7 @@ import com.google.gson.TypeAdapter
 import com.google.gson.TypeAdapterFactory
 import com.google.gson.reflect.TypeToken
 import com.google.gson.stream.JsonReader
+import com.google.gson.stream.JsonToken
 import com.google.gson.stream.JsonWriter
 import kotlin.jvm.internal.Reflection
 import kotlin.reflect.KClass
@@ -29,7 +30,12 @@ class NullableTypeAdapterFactory : TypeAdapterFactory {
                 override fun write(out: JsonWriter, value: T?) = delegate.write(out, value)
 
                 override fun read(input: JsonReader): T? {
-                    input.peek()
+
+                    if (input.peek() == JsonToken.NULL) {
+                        input.nextNull()
+                        return null
+                    }
+
                     val value = input.nextString()
                     // search json token in enum
                     val kotlinClass: KClass<Any> = Reflection.createKotlinClass(type.rawType)

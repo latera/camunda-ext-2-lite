@@ -5,8 +5,6 @@ import io.ktor.client.engine.apache.Apache
 import io.ktor.client.features.*
 import io.ktor.client.features.auth.Auth
 import io.ktor.client.features.auth.providers.*
-import io.ktor.client.features.json.GsonSerializer
-import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.request.*
 import io.ktor.http.URLBuilder
 import org.apache.http.conn.ssl.*
@@ -18,21 +16,21 @@ object HomsClient {
         val useSSL: Boolean = true,
         val user: String,
         val password: String,
-        val timeout: Long
+        val timeout: HTTPTimeoutsConfig,
+        val token: String? = null
     )
 
     fun getClient(config: Config): HttpClient {
         val urlObject = URLBuilder(config.url)
 
         return HttpClient(Apache) {
-            install(JsonFeature) {
-                serializer =
-                    GsonSerializer {
-                        disableHtmlEscaping()
-                        registerTypeAdapterFactory(NullableTypeAdapterFactory())
-                    }
+            installGsonSerializer()
+            installTimeOutConfig(config.timeout)
+
+            HttpResponseValidator {
+                errorValidation()
             }
-            install(HttpTimeout) { requestTimeoutMillis = config.timeout }
+
             install(Auth) {
                 basic {
                     username = config.user

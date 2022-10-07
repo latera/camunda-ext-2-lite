@@ -1,6 +1,0 @@
-//[camunda-7.14-ext-2](../../../../index.md)/[com.hydra_billing.camunda.api.planado_v2](../../index.md)/[Template](../index.md)/[TemplateData](index.md)/[TemplateData](-template-data.md)
-
-# TemplateData
-
-[jvm]\
-fun [TemplateData](-template-data.md)(uuid: String, name: String, description: String? = null, type: [JobType](../../../com.hydra_billing.camunda.api.planado_v2.common_types.job/-job-type/index.md)? = null, assignee: [JobAssignee](../../../com.hydra_billing.camunda.api.planado_v2.common_types.job/-job-assignee/index.md)? = null, territory: [JobTerritory](../../../com.hydra_billing.camunda.api.planado_v2.common_types.job/-job-territory/index.md)? = null, skills: Array<[Skill](../../../com.hydra_billing.camunda.api.planado_v2.common_types/-skill/index.md)> = arrayOf(), custom_fields: Array<[JobCustomField](../../../com.hydra_billing.camunda.api.planado_v2.common_types.job/-job-custom-field/index.md)> = arrayOf(), report_fields: Array<[JobCustomField](../../../com.hydra_billing.camunda.api.planado_v2.common_types.job/-job-custom-field/index.md)> = arrayOf(), possible_resolutions: Array<[JobResolution](../../../com.hydra_billing.camunda.api.planado_v2.common_types.job/-job-resolution/index.md)> = arrayOf(), created_at: String, updated_at: String)

@@ -83,7 +83,7 @@ class Order(val client: HttpClient) {
     inline fun <reified T> update(params: OrderParams<T>): Order<T> {
         val client = this.client
 
-        logger.info("Update order with $params.")
+        logger.debug("Update order with $params.")
 
         val response = runBlocking {
             client.put<Response<T>> {

@@ -17,8 +17,12 @@ class TaskNotifier(val client: HttpClient) : TaskListener {
             val candidates = TaskNotifier.getCandidates(task)
             val users = candidates.toTypedArray() + assignee
             val version = System.currentTimeMillis()
-
-            TaskEvent(client).update(task.getId(), task.getEventName(), assignee, users, version)
+            try {
+                TaskEvent(client).update(task.getId(), task.getEventName(), assignee, users, version)
+            } catch (e: Exception) {
+                client.close()
+                throw e
+            }
         }
 
         Context.getCommandContext()

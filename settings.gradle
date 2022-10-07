@@ -7,6 +7,6 @@
  * in the user manual at https://docs.gradle.org/6.8.2/userguide/multi_project_builds.html
  */
 
-rootProject.name = 'camunda-7.14-ext-2'
+rootProject.name = 'camunda-7.14-ext-2-lite'
 include('lib')
 rootProject.children.each { it.name = rootProject.name }

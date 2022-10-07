@@ -1,9 +1,13 @@
 package com.hydra_billing.camunda.helpers.camunda
 
+import com.google.gson.GsonBuilder
+import com.google.gson.JsonParseException
+import com.google.gson.JsonSyntaxException
 import com.hydra_billing.camunda.exceptions.CantCastVariable
 import com.hydra_billing.camunda.exceptions.EmptyExecutionVariable
 import com.hydra_billing.camunda.exceptions.NoSuchConstant
 import com.hydra_billing.camunda.exceptions.WrongNumberFormat
+import com.hydra_billing.camunda.http_clients.NullableTypeAdapterFactory
 import org.camunda.bpm.engine.delegate.DelegateExecution
 import java.math.BigDecimal
 import kotlin.reflect.KProperty1
@@ -69,6 +73,8 @@ inline fun <reified T> getVariableAs(execution: DelegateExecution, variable: Str
         return execution.getVariable(variable) as T
     } catch (e: ClassCastException) {
         throw CantCastVariable("Variable $variable cant be cast to ${T::class}")
+    } catch (e: NullPointerException) {
+        throw EmptyExecutionVariable("Variable $variable is empty")
     }
 }
 
@@ -85,5 +91,16 @@ fun getNullableBigDecimal(execution: DelegateExecution, variable: String): BigDe
         return getNullableString(execution, variable)?.toBigDecimal()
     } catch (e: NumberFormatException) {
         throw WrongNumberFormat("Variable $variable(${execution.getVariable(variable)}) cant be converted to BigDecimal")
+    }
+}
+
+inline fun <reified T> getJson(execution: DelegateExecution, variable: String): T {
+    try {
+        val gson = GsonBuilder().registerTypeAdapterFactory(NullableTypeAdapterFactory()).create()
+        return gson.fromJson(getString(execution, variable), T::class.java)
+    } catch (e: JsonParseException) {
+        throw throw CantCastVariable("Variable $variable cant be cast to ${T::class}")
+    } catch (e: JsonSyntaxException) {
+        throw throw CantCastVariable("Variable $variable cant be cast to ${T::class}")
     }
 }

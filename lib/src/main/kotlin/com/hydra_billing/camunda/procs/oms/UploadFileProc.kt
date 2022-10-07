@@ -24,6 +24,8 @@ class UploadFileProc : BaseProc() {
 
     override fun perform(execution: DelegateExecution) {
         val restApi = LoginHelper.getHomsClient()
+        addClient(restApi)
+
         val fileName = getString(execution, "homsFileName")
         val fileContent = getString(execution, "homsFileContent")
         val fieldName = getNullableString(execution, "homsFileFieldName")
