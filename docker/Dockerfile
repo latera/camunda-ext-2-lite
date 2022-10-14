@@ -1,5 +1,5 @@
-# build camunda-ext-2
-FROM gradle:7.1.1 as camunda-ext-2
+# build camunda-ext-2-lite
+FROM gradle:7.1.1 as camunda-ext-2-lite
 
 COPY ./lib ./gradle ./gradlew ./settings.gradle ./gradlew.bat /app/
 
@@ -23,5 +23,5 @@ COPY --chown=camunda:camunda ./docker/seed_db.sh /camunda/
 COPY --chown=camunda:camunda ./docker/camunda.sh /camunda/
 COPY --chown=camunda:camunda ./docker/conf/bpm-platform.xml /camunda/conf/
 
-COPY --from=camunda-ext-2 --chown=camunda:camunda /app/lib/*.jar /camunda/lib/
-COPY --from=camunda-ext-2 --chown=camunda:camunda /app/build/libs/*.jar /camunda/lib/
+COPY --from=camunda-ext-2-lite --chown=camunda:camunda /app/lib/*.jar /camunda/lib/
+COPY --from=camunda-ext-2-lite --chown=camunda:camunda /app/build/libs/*.jar /camunda/lib/

@@ -14,7 +14,7 @@ group = 'com.hydra-billing'
 
 dependencyLocking {
     lockAllConfigurations()
-    lockMode = LockMode.STRICT
+    lockMode = LockMode.DEFAULT
 }
 
 repositories {
