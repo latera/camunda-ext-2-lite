@@ -44,5 +44,5 @@ jobs:
           name: ${{ env.VERSION }}
           tag_name: ${{ env.VERSION }}
           target_commitish: ${{ github.sha }}
-          files: camunda-7.14-ext-2-${{ env.VERSION }}.jar
+          files: camunda-7.14-ext-2-lite-${{ env.VERSION }}.jar
         if: github.event.inputs.version != ''
