@@ -12,7 +12,7 @@ on:
       - '**'
 
 env:
-  DOCKER_IMAGE: "latera/camunda-ext2-lite"
+  DOCKER_IMAGE: "latera/camunda-ext-2-lite"
 
 jobs:
   build:
@@ -36,7 +36,7 @@ jobs:
           docker login -u ${{ secrets.DOCKER_HUB_USER }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
           docker push "${DOCKER_IMAGE}:${{ env.VERSION }}"
           docker create --name jar "${DOCKER_IMAGE}:${{ env.VERSION }}"
-          docker cp jar:/camunda/lib/camunda-7.14-ext-2-${{ env.VERSION }}.jar ./
+          docker cp jar:/camunda/lib/camunda-7.14-ext-2-lite-${{ env.VERSION }}.jar ./
         if: github.event.inputs.version != ''
       - name: create release
         uses: softprops/action-gh-release@v1
@@ -44,5 +44,5 @@ jobs:
           name: ${{ env.VERSION }}
           tag_name: ${{ env.VERSION }}
           target_commitish: ${{ github.sha }}
-          files: camunda-7.14-ext-2-${{ env.VERSION }}.jar
+          files: camunda-7.14-ext-2-lite-${{ env.VERSION }}.jar
         if: github.event.inputs.version != ''
