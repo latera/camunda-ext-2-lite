@@ -1,4 +1,4 @@
-# build camunda-ext-2
+# build camunda-ext-2-lite
 FROM gradle:7.1.1 as camunda-ext-2-lite
 
 COPY ./lib ./gradle ./gradlew ./settings.gradle ./gradlew.bat /app/

@@ -1,0 +1,114 @@
+version: '2'
+services:
+  db_bpm:
+    image: postgres:12-alpine
+    container_name: postgres-bpm
+    restart: always
+    env_file: ".env"
+    environment:
+      POSTGRES_DB: $BPM_DB_NAME
+      POSTGRES_USER: $BPM_DB_USER
+      POSTGRES_PASSWORD: $BPM_DB_PASSWORD
+    volumes:
+      - ./data/camunda/postgresql:/var/lib/postgresql/data
+    networks:
+      - postgres-bpm
+  db_homs:
+    image: postgres:12-alpine
+    container_name: postgres-homs
+    restart: always
+    env_file: ".env"
+    environment:
+      POSTGRES_DB: $HOMS_DB_NAME
+      POSTGRES_USER: $HOMS_DB_USER
+      POSTGRES_PASSWORD: $HOMS_DB_PASSWORD
+    volumes:
+      - ./data/homs/postgresql:/var/lib/postgresql/data
+    networks:
+      - postgres-homs
+  minio:
+    image: minio/minio
+    container_name: minio
+    restart: always
+    command: server /opt/minio --console-address "0.0.0.0:9001"
+    env_file: ".env"
+    environment:
+      - TZ=${TZ}
+    volumes:
+      - ./data/minio:/var/minio
+    ports:
+      - $MINIO_PORT:9001
+    networks:
+      - default
+      - minio
+  homs:
+    image: latera/homs:2.7.0
+    container_name: homs
+    restart: always
+    env_file: ".env"
+    environment:
+      - TZ=${TZ}
+      - RAILS_ENV=production
+      - SEED_DB=${HOMS_DB_SEED}
+      - LOG_LEVEL=${HOMS_LOG_LEVEL}
+      - ADMIN_EMAIL=${HOMS_USER}
+      - ADMIN_PASSWORD=${HOMS_PASSWORD}
+      - ADMIN_API_TOKEN=${HOMS_TOKEN}
+      - REDIS_URL=redis://redis
+    depends_on:
+      - db_homs
+    ports:
+      - $HOMS_PORT:3000
+    networks:
+      - default
+      - postgres-homs
+      - bpm
+      - homs
+      - redis
+      - minio
+  bpm:
+    image: latera/camunda-ext-2-lite:6.0
+    container_name: bpm
+    restart: always
+    env_file: ".env"
+    environment:
+      DB_USERNAME: $BPM_DB_USER
+      DB_PASSWORD: $BPM_DB_PASSWORD
+      WAIT_FOR: "${BPM_DB_HOST}:${BPM_DB_PORT}"
+      WAIT_FOR_TIMEOUT: 120
+    ports:
+      - $BPM_PORT:8080
+    depends_on:
+      - db_bpm
+    networks:
+      - default
+      - postgres-bpm
+      - homs
+      - minio
+  redis:
+    image: healthcheck/redis
+    container_name: redis
+    restart: always
+    environment:
+      - TZ=${TZ}
+    networks:
+      - redis
+networks:
+  postgres-bpm:
+    internal: true
+    name: postgres-bpm
+  postgres-homs:
+    internal: true
+    name: postgres-homs
+  bpm:
+    internal: true
+    name: bpm
+  homs:
+    internal: true
+    name: homs
+  minio:
+    internal: true
+    name: minio
+  redis:
+    internal: true
+    name: redis
