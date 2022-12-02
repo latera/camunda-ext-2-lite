@@ -1,0 +1,26 @@
+en:
+  vacation_request:
+    label: Vacation Request
+    HandleRequest:
+      label: Handle Request
+      group1: Request Data
+      firstName: First Name
+      lastName: Last Name
+      beginDate: Begin Date
+      endDate: End Date
+      motivationText: Motivation
+      group2: Request Resolution
+      resolutionText: Resolution
+      Approve: Approve
+      Disapprove: Disapprove
+    AdjustRequest:
+      label: Adjust Request
+      static1: <div class="alert alert-info"><h4>You are performing this task in <b>Employee</b> role</h4><small>In production mode this task is invisible for manager and should be done by employee</small></div>
+      group1: Request Resolution
+      resolutionText: Resolution
+      group2: Request Data
+      beginDate: Begin Date
+      endDate: End Date
+      motivationText: Motivation
+      Resend: Resend
+      Cancel Request: Cancel Request

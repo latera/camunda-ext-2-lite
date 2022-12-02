@@ -1,0 +1,67 @@
+en:
+  pizza_order:
+    label: Pizza Order
+    Task_0nms4bu:
+      label: Check Base Order Data
+      group1: Customer Data
+      customerName: Name
+      customerPhone: Phone
+      group2: Pizza Type
+      pizzaType: ''
+      Confirm: Confirm
+    Task_0662kqn:
+      label: Select Ingredients for Margherita Pizza
+      group1: Customer Data
+      customerName: Name
+      customerPhone: Phone
+      group2: Pizza Type
+      pizzaType: ''
+      group3: Pizza Ingredients
+      ingredientCheese: Cheese
+      ingredientSalami: Salami
+      ingredientPepper: Pepper
+      ingredientMushrooms: Mushrooms
+      ingredientVegetables: Vegetables
+      ingredientOlives: Olives
+    Task_1o6ntxw:
+      label: Select Ingredients for Cheese Pizza
+      group1: Customer Data
+      customerName: Name
+      customerPhone: Phone
+      group2: Pizza Type
+      pizzaType: ''
+      group3: Pizza Ingredients
+      ingredientSalami: Salami
+      ingredientPepper: Pepper
+      ingredientMushrooms: Mushrooms
+      ingredientVegetables: Vegetables
+      ingredientOlives: Olives
+    Task_0wqjgmz:
+      label: Select Ingredients for Salami Pizza
+      group1: Customer Data
+      customerName: Name
+      customerPhone: Phone
+      group2: Pizza Type
+      pizzaType: ''
+      group3: Pizza Ingredients
+      ingredientCheese: Cheese
+      ingredientPepper: Pepper
+      ingredientMushrooms: Mushrooms
+      ingredientVegetables: Vegetables
+      ingredientOlives: Olives
+    Task_0bnivbt:
+      label: Show Order Sum
+      group1: Customer Data
+      customerName: Name
+      customerPhone: Phone
+      group2: Pizza Type
+      pizzaType: ''
+      group3: Pizza Ingredients
+      ingredientCheese: Cheese
+      ingredientSalami: Salami
+      ingredientPepper: Pepper
+      ingredientMushrooms: Mushrooms
+      ingredientVegetables: Vegetables
+      ingredientOlives: Olives
+      group4: Order Sum
+      pizzaPrice: Pizza Price, $
