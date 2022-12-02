@@ -1,0 +1,33 @@
+hbw:
+  entities:
+    order:
+      entity_code_key: homsOrderCode
+      bp_name_key: homsProcessName
+
+      bp_toolbar:
+        entity_type_buttons:
+          pizza_order:                              # Order type code
+            - name: 'Process Pizza Order'           # Button text
+              title: 'Start pizza order processing' # Button help text
+              class: 'btn btn-default'              # Button container class
+              fa_class: ['fas', 'user']             # Button icon class
+              bp_code: 'pizza_order'                # Business process code
+          vacation_request:
+            - name: 'Vacation request'
+              title: 'Approve Vacation Request'
+              class: 'btn btn-default'
+              fa_class: ['fas', 'user']
+              bp_code: 'vacation_request'
+
+  use_bpm_stub: false
+
+  minio:
+    endpoint: <%= "#{ENV['MINIO_HOST']}:#{ENV['MINIO_PORT']}" %>
+    access_key_id: <%= ENV['MINIO_ACCESS_KEY'] %>
+    secret_access_key: <%= ENV['MINIO_SECRET_KEY'] %>
+    bucket: <%= ENV['MINIO_BUCKET_NAME'] %>
+    region: 'us-east-1'
+
+  allowed_request_origins:
+    - http://*
+    - https://*

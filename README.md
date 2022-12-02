@@ -18,7 +18,7 @@ Camunda-ext-2-lite includes the only connector - Hydra OMS connector, all other 
 * Tickets/Issues: https://github.com/hydra-billing/camunda-ext-2-lite/issues
 * Hydra OMS: https://github.com/hydra-billing/homs
 
-## Installation
+## Quick start
 Edit `.env` file if needed, then run
 `docker-compose up -d`
 

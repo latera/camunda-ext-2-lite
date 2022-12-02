@@ -1,0 +1,58 @@
+form:
+  css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
+  hide_delete_button: true
+  fields:
+    - name: group1
+      type: group
+      label: Request Data
+      css_class: col-xs-12
+      fields:
+        - name: firstName
+          type: string
+          editable: false
+          label: First Name
+          css_class: col-xs-6 col-sm-4 col-md-3
+        - name: lastName
+          type: string
+          editable: false
+          label: Last Name
+          css_class: col-xs-6 col-sm-4 col-md-3
+        - name: beginDate
+          type: datetime
+          format: DD.MM.YYYY
+          editable: false
+          label: Begin Date
+          css_class: col-xs-6 col-sm-4 col-md-3
+        - name: endDate
+          type: datetime
+          format: DD.MM.YYYY
+          label: End Date
+          editable: false
+          css_class: col-xs-6 col-sm-4 col-md-3
+        - name: motivationText
+          type: text
+          rows: 3
+          editable: false
+          label: Motivation
+          css_class: col-xs-12
+    - name: group2
+      type: group
+      label: Request Resolution
+      css_class: col-xs-12
+      fields:
+        - name: resolutionText
+          type: text
+          rows: 3
+          css_class: col-xs-12
+          label: Resolution
+          editable: true
+    - name: resolution
+      type: submit_select
+      css_class: col-xs-12
+      options:
+        - name: Approve
+          value: Approved
+          css_class: btn btn-primary
+        - name: Disapprove
+          value: Disapproved
+          css_class: btn btn-danger

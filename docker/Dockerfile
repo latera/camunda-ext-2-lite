@@ -1,3 +1,13 @@
+# build demo_processes
+FROM gradle:7.1.1-jdk11 as bp
+
+COPY ./demo_processes /demo_processes
+
+WORKDIR /demo_processes
+
+RUN gradle -q projects | grep -oP "Project ':\K.*(?=')" | while read p; do gradle ${p}:war </dev/null; done && \
+    gradle copyDependencies
+
 # build camunda-ext-2-lite
 FROM gradle:7.1.1 as camunda-ext-2-lite
 
@@ -25,3 +35,4 @@ COPY --chown=camunda:camunda ./docker/conf/bpm-platform.xml /camunda/conf/
 
 COPY --from=camunda-ext-2-lite --chown=camunda:camunda /app/lib/*.jar /camunda/lib/
 COPY --from=camunda-ext-2-lite --chown=camunda:camunda /app/build/libs/*.jar /camunda/lib/
+COPY --from=bp --chown=camunda:camunda /demo_processes/*/build/libs/*.war /camunda/webapps/

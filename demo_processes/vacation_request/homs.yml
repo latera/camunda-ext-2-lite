@@ -1,0 +1,31 @@
+order_type:
+  code: vacation_request
+  name: Vacation Request
+  fields:
+    firstName:
+      type: string
+      label: First Name
+    lastName:
+      type: string
+      label: Last Name
+    email:
+      type: string
+      label: E-mail
+    beginDate:
+      type: string
+      label: Begin Date
+    endDate:
+      type: string
+      label: End Date
+    motivationText:
+      type: string
+      label: Motivation Text
+    resolution:
+      type: string
+      label: Resolution
+    resolutionText:
+      type: string
+      label: Resolution Text
+    adjustResult:
+      type: string
+      label: Adjust Result

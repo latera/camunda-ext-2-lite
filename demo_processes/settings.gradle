@@ -1,0 +1,3 @@
+rootProject.name = 'demo_processes'
+include 'pizza_order'
+include 'vacation_request'

@@ -1,8 +1,8 @@
 version: '2'
 services:
-  db_bpm:
+  db_camunda:
     image: postgres:12-alpine
-    container_name: postgres-bpm
+    container_name: postgres-camunda
     restart: always
     env_file: ".env"
     environment:
@@ -12,7 +12,7 @@ services:
     volumes:
       - ./data/camunda/postgresql:/var/lib/postgresql/data
     networks:
-      - postgres-bpm
+      - postgres-camunda
   db_homs:
     image: postgres:12-alpine
     container_name: postgres-homs
@@ -57,32 +57,37 @@ services:
       - REDIS_URL=redis://redis
     depends_on:
       - db_homs
+    volumes:
+      - ./seeds.rb:/opt/homs/db/seeds.rb
+      - ./hbw.yml:/opt/homs/config/hbw.yml
+      - ./demo_processes/locales:/opt/homs/config/locales/bp:ro
     ports:
       - $HOMS_PORT:3000
     networks:
       - default
       - postgres-homs
-      - bpm
+      - camunda
       - homs
       - redis
       - minio
-  bpm:
+  camunda:
     image: latera/camunda-ext-2-lite:6.0
-    container_name: bpm
+    container_name: camunda
     restart: always
     env_file: ".env"
     environment:
       DB_USERNAME: $BPM_DB_USER
       DB_PASSWORD: $BPM_DB_PASSWORD
+      LOG_LVL: "info"
       WAIT_FOR: "${BPM_DB_HOST}:${BPM_DB_PORT}"
       WAIT_FOR_TIMEOUT: 120
     ports:
       - $BPM_PORT:8080
     depends_on:
-      - db_bpm
+      - db_camunda
     networks:
       - default
-      - postgres-bpm
+      - postgres-camunda
       - homs
       - minio
   redis:
@@ -94,15 +99,15 @@ services:
     networks:
       - redis
 networks:
-  postgres-bpm:
+  postgres-camunda:
     internal: true
-    name: postgres-bpm
+    name: postgres-camunda
   postgres-homs:
     internal: true
     name: postgres-homs
-  bpm:
+  camunda:
     internal: true
-    name: bpm
+    name: camunda
   homs:
     internal: true
     name: homs
