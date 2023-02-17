@@ -27,10 +27,10 @@ services:
     networks:
       - postgres-homs
   minio:
-    image: minio/minio
+    image: minio/minio:RELEASE.2021-06-17T00-10-46Z
     container_name: minio
     restart: always
-    command: server /opt/minio --console-address "0.0.0.0:9001"
+    command: server /opt/minio --address "0.0.0.0:9001"
     env_file: ".env"
     environment:
       - TZ=${TZ}
