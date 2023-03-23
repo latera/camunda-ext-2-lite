@@ -12,7 +12,7 @@ on:
       - '**'
 
 env:
-  DOCKER_IMAGE: "latera/camunda-ext-2-lite"
+  DOCKER_IMAGE: "hydrabilling/camunda-ext-2-lite"
 
 jobs:
   build:
