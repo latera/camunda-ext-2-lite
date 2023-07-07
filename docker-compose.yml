@@ -41,7 +41,7 @@ services:
     networks:
       - net
   homs:
-    image: latera/homs:2.7.0
+    image: hydrabilling/homs:2.7.0
     container_name: homs
     restart: unless-stopped
     env_file: .env
@@ -65,7 +65,7 @@ services:
     networks:
       - net
   camunda:
-    image: latera/camunda-ext-2-lite:6.0
+    image: hydrabilling/camunda-ext-2-lite:6.0
     container_name: camunda
     restart: unless-stopped
     env_file: .env
