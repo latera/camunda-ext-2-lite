@@ -1,6 +1,6 @@
 version: '3.6'
 services:
-  db_camunda:
+  postgres_camunda:
     image: postgres:12-alpine
     container_name: postgres-camunda
     restart: unless-stopped
@@ -12,8 +12,8 @@ services:
     volumes:
       - ./data/camunda/postgresql:/var/lib/postgresql/data
     networks:
-      - net
-  db_homs:
+      - hydra
+  postgres_homs:
     image: postgres:12-alpine
     container_name: postgres-homs
     restart: unless-stopped
@@ -25,28 +25,25 @@ services:
     volumes:
       - ./data/homs/postgresql:/var/lib/postgresql/data
     networks:
-      - net
+      - hydra
   minio:
     image: minio/minio:RELEASE.2021-06-17T00-10-46Z
     container_name: minio
     restart: unless-stopped
     command: server /opt/minio --address "0.0.0.0:9001"
     env_file: .env
-    environment:
-      - TZ=${TZ}
     volumes:
       - ./data/minio:/opt/minio
     ports:
       - $MINIO_PORT:9001
     networks:
-      - net
+      - hydra
   homs:
-    image: hydrabilling/homs:2.7.0
+    image: hydrabilling/homs
     container_name: homs
     restart: unless-stopped
     env_file: .env
     environment:
-      - TZ=${TZ}
       - RAILS_ENV=production
       - SEED_DB=${HOMS_DB_SEED}
       - LOG_LEVEL=${HOMS_LOG_LEVEL}
@@ -55,7 +52,7 @@ services:
       - ADMIN_API_TOKEN=${HOMS_TOKEN}
       - REDIS_URL=redis://redis
     depends_on:
-      - db_homs
+      - postgres_homs
     volumes:
       - ./seeds.rb:/opt/homs/db/seeds.rb
       - ./hbw.yml:/opt/homs/config/hbw.yml
@@ -63,9 +60,9 @@ services:
     ports:
       - $HOMS_PORT:3000
     networks:
-      - net
+      - hydra
   camunda:
-    image: hydrabilling/camunda-ext-2-lite:6.0
+    image: hydrabilling/camunda-ext-2-lite
     container_name: camunda
     restart: unless-stopped
     env_file: .env
@@ -78,16 +75,15 @@ services:
     ports:
       - $BPM_PORT:8080
     depends_on:
-      - db_camunda
+      - postgres_camunda
     networks:
-      - net
+      - hydra
   redis:
     image: healthcheck/redis
     container_name: redis
     restart: unless-stopped
-    environment:
-      - TZ=${TZ}
     networks:
-      - net
+      - hydra
 networks:
-  net:
+  hydra:
+    name: hydra
