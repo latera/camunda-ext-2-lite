@@ -44,12 +44,12 @@ services:
     restart: unless-stopped
     env_file: .env
     environment:
-      - RAILS_ENV=production
-      - SEED_DB=${HOMS_DB_SEED}
-      - LOG_LEVEL=${HOMS_LOG_LEVEL}
-      - ADMIN_EMAIL=${HOMS_USER}
-      - ADMIN_PASSWORD=${HOMS_PASSWORD}
-      - ADMIN_API_TOKEN=${HOMS_TOKEN}
+      - SECRET_KEY_BASE=$HOMS_SECRET_KEY_BASE
+      - SEED_DB=$HOMS_DB_SEED
+      - LOG_LEVEL=$HOMS_LOG_LEVEL
+      - ADMIN_EMAIL=$HOMS_USER
+      - ADMIN_PASSWORD=$HOMS_PASSWORD
+      - ADMIN_API_TOKEN=$HOMS_TOKEN
       - REDIS_URL=redis://redis
     depends_on:
       - postgres_homs
@@ -69,7 +69,7 @@ services:
     environment:
       - DB_USERNAME=$BPM_DB_USER
       - DB_PASSWORD=$BPM_DB_PASSWORD
-      - LOG_LVL=info
+      - LOG_LVL=$BPM_LOG_LEVEL
       - WAIT_FOR=$BPM_DB_HOST:$BPM_DB_PORT
       - WAIT_FOR_TIMEOUT=120
     ports:
